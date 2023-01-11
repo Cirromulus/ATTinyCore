@@ -43,10 +43,14 @@
 
 
 #ifdef TWDR
-  #if ((RAMEND + 1) - RAMSTART) > 128
-    #define BUFFER_LENGTH 32
+  #ifndef WIRE_BUFFER_LENGTH
+    #if ((RAMEND + 1) - RAMSTART) > 128
+      #define BUFFER_LENGTH 32
+    #else
+      #define BUFFER_LENGTH 16
+    #endif
   #else
-    #define BUFFER_LENGTH 16
+    #define BUFFER_LENGTH WIRE_BUFFER_LENGTH
   #endif
 
   #ifndef TwoWire_h
